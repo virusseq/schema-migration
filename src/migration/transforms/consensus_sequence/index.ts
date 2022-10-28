@@ -1,0 +1,57 @@
+/*
+ * Copyright (c) 2022 The Ontario Institute for Cancer Research. All rights reserved
+ *
+ * This program and the accompanying materials are made available under the terms of
+ * the GNU Affero General Public License v3.0. You should have received a copy of the
+ * GNU Affero General Public License along with this program.
+ *  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+ * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+import config from '../../../config';
+import { createTransformChain } from '../../transform';
+import cs3to4 from './03_to_04';
+import cs4to5 from './04_to_05';
+import cs5to6 from './05_to_06';
+import cs6to7 from './06_to_07';
+import cs7to8 from './07_to_08';
+import cs8to9 from './08_to_09';
+import cs9to10 from './09_to_10';
+import cs10to11 from './10_to_11';
+import cs11to12 from './11_to_12';
+import cs12to13 from './12_to_13';
+import cs13to14 from './13_to_14';
+
+const migrationChain = createTransformChain(
+	cs3to4,
+	cs4to5,
+	cs5to6,
+	cs6to7,
+	cs7to8,
+	cs8to9,
+	cs9to10,
+	cs10to11,
+	cs11to12,
+	cs12to13,
+);
+
+if (!migrationChain.success) {
+	throw new Error(['Unable to initialize migration chain', ...migrationChain.errors].join(' -- '));
+}
+
+// Based on environment we are running in, we may need to migrate to schema 14:
+const finalChain = config.migration.use14 ? migrationChain.data.add(cs13to14) : migrationChain;
+if (!finalChain.success) {
+	throw new Error(['Unable to initialize migration chain', ...finalChain.errors].join(' -- '));
+}
+
+export default finalChain.data;
