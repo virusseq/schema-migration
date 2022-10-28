@@ -1,0 +1,54 @@
+{
+	"name": "schema-migration",
+	"version": "1.0.0",
+	"description": "Script To Migrate Song analyses to latest schema",
+	"main": "dist/index.js",
+	"scripts": {
+		"once": "npm run build && npm start",
+		"start": "node dist/index.js",
+		"build": "rm -rf dist && tsc",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/cancogen-virus-seq/schema-migration.git"
+	},
+	"keywords": [
+		"typescript",
+		"overture-stack"
+	],
+	"author": "Ontario Institute for Cancer Research",
+	"license": "GPL-3.0",
+	"bugs": {
+		"url": "https://github.com/cancogen-virus-seq/schema-migration/issues"
+	},
+	"homepage": "https://github.com/cancogen-virus-seq/schema-migration#readme",
+	"devDependencies": {
+		"@types/jsonwebtoken": "^8.5.9",
+		"@types/lodash": "^4.14.186",
+		"@types/node": "^18.11.0",
+		"@types/node-fetch": "^2.6.2",
+		"@types/url-join": "^4.0.1",
+		"ts-node": "^10.9.1",
+		"typescript": "^4.8.4"
+	},
+	"dependencies": {
+		"abort-controller": "^3.0.0",
+		"dotenv": "^16.0.3",
+		"form-data": "^4.0.0",
+		"jsonwebtoken": "^8.5.1",
+		"lodash": "^4.17.21",
+		"node-fetch": "^2.6.7",
+		"node-vault": "^0.9.22",
+		"url-join": "^4.0.1",
+		"winston": "^3.8.2",
+		"zod": "^3.19.1"
+	},
+	"prettier": {
+		"arrowParens": "always",
+		"printWidth": 120,
+		"singleQuote": true,
+		"trailingComma": "all",
+		"useTabs": true
+	}
+}
