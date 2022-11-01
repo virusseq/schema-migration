@@ -53,8 +53,8 @@ const loadVaultSecrets = async () => {
 			try {
 				secrets = await vault.loadSecret(process.env.VAULT_SECRETS_PATH);
 			} catch (err) {
-				logger.error('Failed to load secrets from vault.');
-				throw new Error('Failed to load secrets from vault.');
+				logger.error('Failed to load secrets from vault.', err);
+				throw err;
 			}
 		}
 	}
