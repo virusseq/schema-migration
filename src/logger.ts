@@ -23,19 +23,22 @@ import { unknownToString } from './utils/typeUtils';
 const APP_NAME = process.env.APP_NAME || 'SchemaMigrator';
 
 const { combine, timestamp, colorize, printf } = format;
+
+const isProduction = process.env.NODE_ENV === 'production';
+
+const consoleTransport = new transports.Console({
+	level: isProduction ? 'info' : 'debug',
+});
+
+const debugFileTransport = new transports.File({ filename: 'debug.log', level: 'debug' });
+
 const options: LoggerOptions = {
 	format: combine(
 		colorize(),
 		timestamp(),
 		printf((info) => `${info.timestamp} ${info.level}: ${info.message}`),
 	),
-	transports: [
-		new transports.Console({
-			level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
-			debugStdout: !(process.env.NODE_ENV === 'production'),
-		}),
-		new transports.File({ filename: 'debug.log', level: 'debug' }),
-	],
+	transports: isProduction ? [consoleTransport] : [consoleTransport, debugFileTransport],
 };
 
 const logger = createLogger(options);
