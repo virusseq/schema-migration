@@ -131,7 +131,7 @@ const migrateAndUpdateStudy =
 				.run();
 
 			if (!pageResult.success) {
-				logger.error(pageResult.errors);
+				logger.error(...pageResult.errors);
 				return summary;
 			}
 
@@ -143,7 +143,7 @@ const migrateAndUpdateStudy =
 				} else {
 					summary.counts.error++;
 					summary.counts.processed++;
-					logger.error(result.errors);
+					logger.error(...result.errors);
 				}
 			});
 
