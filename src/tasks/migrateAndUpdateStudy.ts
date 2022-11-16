@@ -20,6 +20,7 @@
 import { AnalysisFilters, SongClient } from '../external/song';
 import { Analysis, PagedAnalysisResponse } from '../external/song/types';
 import { asyncPipe, pipe } from '../structures/pipe';
+import consensusSequenceMigrationChain from '../migration/transforms/consensus_sequence';
 
 import { withResultAsync } from '../types/result';
 import migrateAnalyses from './migrateAnalyses';
@@ -76,7 +77,9 @@ const migrateAndUpdateStudy =
 
 		/* ===== Functions to Help Update Each page of Analyses ===== */
 		const filterSkippedAnalyses = (analyses: Analysis[]): Analysis[] => {
-			const filtered = analyses.filter((analysis) => analysis.analysisType.version < 14);
+			const filtered = analyses.filter(
+				(analysis) => analysis.analysisType.version < consensusSequenceMigrationChain.getEnd().version,
+			);
 			const skipped = analyses.length - filtered.length;
 			summary.counts.skipped += skipped;
 			summary.counts.processed += skipped;
