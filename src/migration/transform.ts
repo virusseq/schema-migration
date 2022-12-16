@@ -34,7 +34,7 @@ export const defineTransform = (
 		}
 		const transformResult = transformer(input);
 		if (!transformResult.success) {
-			return failure(`Error applying transform`, versions, transformResult);
+			return failure(`Error applying transform`, versions, ...transformResult.errors);
 		}
 		return success({
 			...transformResult.data,
