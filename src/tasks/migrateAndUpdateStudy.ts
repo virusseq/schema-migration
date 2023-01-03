@@ -55,7 +55,7 @@ const migrateAndUpdateStudy =
 	async (study: string): Promise<MigrationSummary> => {
 		/* ===== State Setup and Summary object ===== */
 		const filters: AnalysisFilters = {
-			states: ['PUBLISHED', 'UNPUBLISHED', 'SUPPRESSED'],
+			states: ['PUBLISHED'],
 			study,
 		};
 
