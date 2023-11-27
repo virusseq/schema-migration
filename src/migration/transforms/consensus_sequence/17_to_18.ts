@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 The Ontario Institute for Cancer Research. All rights reserved
+ * Copyright (c) 2023 The Ontario Institute for Cancer Research. All rights reserved
  *
  * This program and the accompanying materials are made available under the terms of
  * the GNU Affero General Public License v3.0. You should have received a copy of the
@@ -17,44 +17,13 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import config from '../../../config';
-import { createTransformChain } from '../../transform';
-import cs3to4 from './03_to_04';
-import cs4to5 from './04_to_05';
-import cs5to6 from './05_to_06';
-import cs6to7 from './06_to_07';
-import cs7to8 from './07_to_08';
-import cs8to9 from './08_to_09';
-import cs9to10 from './09_to_10';
-import cs10to11 from './10_to_11';
-import cs11to12 from './11_to_12';
-import cs12to13 from './12_to_13';
-import cs13to14 from './13_to_14';
-import cs14to15 from './14_to_15';
-import cs15to16 from './15_to_16';
-import cs16to17 from './16_to_17';
-import cs17to18 from './17_to_18';
+import { success } from '../../../types/result';
+import { defineTransform } from '../../transform';
+import { CS_NAME } from './constants';
 
-const migrationChain = createTransformChain(
-	cs3to4,
-	cs4to5,
-	cs5to6,
-	cs6to7,
-	cs7to8,
-	cs8to9,
-	cs9to10,
-	cs10to11,
-	cs11to12,
-	cs12to13,
-	cs13to14,
-	cs14to15,
-	cs15to16,
-	cs16to17,
-	cs17to18,
-);
+/*
+ * Version 17 to 18 Transform
+ * - No Changes
+ */
 
-if (!migrationChain.success) {
-	throw new Error(['Unable to initialize migration chain', ...migrationChain.errors].join(' -- '));
-}
-
-export default migrationChain.data;
+export default defineTransform({ start: { name: CS_NAME, version: 17 }, end: { name: CS_NAME, version: 18 } }, success);
