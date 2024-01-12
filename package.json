@@ -1,6 +1,6 @@
 {
 	"name": "schema-migration",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Script To Migrate Song analyses to latest schema",
 	"main": "dist/index.js",
 	"scripts": {
