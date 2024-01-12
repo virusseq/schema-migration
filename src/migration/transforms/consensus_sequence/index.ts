@@ -34,6 +34,7 @@ import cs14to15 from './14_to_15';
 import cs15to16 from './15_to_16';
 import cs16to17 from './16_to_17';
 import cs17to18 from './17_to_18';
+import cs18to19 from './18_to_19';
 
 const migrationChain = createTransformChain(
 	cs3to4,
@@ -51,6 +52,7 @@ const migrationChain = createTransformChain(
 	cs15to16,
 	cs16to17,
 	cs17to18,
+	cs18to19,
 );
 
 if (!migrationChain.success) {
