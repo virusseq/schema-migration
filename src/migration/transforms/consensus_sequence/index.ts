@@ -17,7 +17,6 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import config from '../../../config';
 import { createTransformChain } from '../../transform';
 import cs3to4 from './03_to_04';
 import cs4to5 from './04_to_05';
@@ -35,6 +34,7 @@ import cs15to16 from './15_to_16';
 import cs16to17 from './16_to_17';
 import cs17to18 from './17_to_18';
 import cs18to19 from './18_to_19';
+import cs19to20 from './19_to_20';
 
 const migrationChain = createTransformChain(
 	cs3to4,
@@ -53,6 +53,7 @@ const migrationChain = createTransformChain(
 	cs16to17,
 	cs17to18,
 	cs18to19,
+	cs19to20,
 );
 
 if (!migrationChain.success) {
